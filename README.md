@@ -22,7 +22,7 @@ Injects secure `securityContext` into Pods *only if* they are labeled with `sec-
 
 ### Getting Started:
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/kyverno/kyverno/main/config/release/install.yaml
+kubectl apply -f kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.11.1/install.yaml
 ```
 
 ### Apply Kyverno Policy:
