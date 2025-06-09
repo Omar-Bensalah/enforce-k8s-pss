@@ -30,7 +30,7 @@ kubectl apply -f https://raw.githubusercontent.com/kyverno/kyverno/main/config/r
 kubectl apply -f kyverno/inject-security-context.yaml
 ```
 
-## 🧪 Test
+## Test
 ```bash
 kubectl apply -f test/insecure-pod.yaml            
 #  Should be rejected by Gatekeeper
