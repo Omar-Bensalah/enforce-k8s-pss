@@ -9,6 +9,9 @@ spec:
         resources:
           kinds:
             - Pod
+          namespaces:
+            - "!dev"
+            - "!test"
           selector:
             matchLabels:
               sec-check: "true"

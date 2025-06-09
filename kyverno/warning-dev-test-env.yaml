@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: warn-missing-security-context-in-dev
+spec:
+  validationFailureAction: audit  # <-- Don't block, just warn
+  background: true
+  rules:
+    - name: warn-missing-security-context
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces:
+            - dev
+            - test
+      validate:
+        message: "WARNING: Pod is missing securityContext. This is allowed in dev/test for testing only. For any production action you securityContext is a must."
+        pattern:
+          spec:
+            containers:
+              - securityContext: "?*"
