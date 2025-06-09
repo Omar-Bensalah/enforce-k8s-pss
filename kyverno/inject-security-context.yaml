@@ -14,7 +14,7 @@ spec:
               sec-check: "true"
       mutate:
         foreach:
-          - list: "spec.containers"
+          - list: "request.object.spec.containers"
             patchStrategicMerge:
               spec:
                 containers:
