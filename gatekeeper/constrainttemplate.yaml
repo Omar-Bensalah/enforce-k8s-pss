@@ -1,0 +1,24 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8ssecuritycontextrequired
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sSecurityContextRequired
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8ssecuritycontextrequired
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Pod"
+
+          not input.review.object.metadata.labels["sec-check"] == "true"
+
+          container := input.review.object.spec.containers[_]
+          not container.securityContext
+
+          msg := sprintf("SecurityContext missing in container %q. To auto-inject it, label the Pod with 'sec-check=true'.", [container.name])
+        }
